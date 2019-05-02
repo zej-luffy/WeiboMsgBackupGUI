@@ -51,7 +51,7 @@ class VerifyCodeFrame(wx.Frame):
             img2 = img1.Scale(w*3, h*3)#2 缩小图像
             #3 转换它们为静态位图部件
             sb2 = wx.StaticBitmap(p, -1, wx.BitmapFromImage(img2))
-            codeText = wx.TextCtrl(p, -1, "", size=(100, 50),style=wx.TE_PROCESS_ENTER)
+            codeText = wx.TextCtrl(parent=p, id=-1, value="", size=(100, 50),style=wx.TE_PROCESS_ENTER)
             codeText.SetMaxLength(7)
             btn = wx.Button(p, label=u"Submit",size=(70, 50))
             btn.SetToolTipString(u"Please type verify code...")
@@ -67,6 +67,7 @@ class VerifyCodeFrame(wx.Frame):
             self.Bind(wx.EVT_CLOSE, self.OnClose)
             self.Fit()
         except:
+            #import traceback;print traceback.format_exc()  
             s=sys.exc_info()
             msg = (u"VerifyCodeFrame ERROR %s happened on line %d" % (s[1],s[2].tb_lineno))
             print msg

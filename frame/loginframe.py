@@ -40,6 +40,8 @@ from model.startimg import StartImg
 import win32con
 import wx.lib.agw.hyperlink as hl
 from frame.verifycodeframe import VerifyCodeFrame
+import wx.adv
+from wx.adv import SplashScreen as wxSplashScreen
 
 class LoginFrame(wx.Frame):
     
@@ -56,8 +58,8 @@ class LoginFrame(wx.Frame):
             
             unLabel = wx.StaticText(loginPanel, -1, u"微博用户：")
             pwLabel = wx.StaticText(loginPanel, -1, u"微博密码：")
-            unText = wx.TextCtrl(loginPanel, -1, self.config.GetUserConfig("sysuser", "un"), size=(200, -1))
-            pwText = wx.TextCtrl(loginPanel, -1, "", size=(200, -1), style=wx.TE_PASSWORD|wx.TE_PROCESS_ENTER)
+            unText = wx.TextCtrl(parent=loginPanel, id=-1, value="", size=(200, -1))
+            pwText = wx.TextCtrl(parent=loginPanel, id=-1, value="", size=(200, -1), style=wx.TE_PASSWORD|wx.TE_PROCESS_ENTER)
             
             inputSizer = wx.FlexGridSizer(cols=2, hgap=5, vgap=5)
             inputSizer.Add(unLabel, 0)
@@ -106,7 +108,7 @@ class LoginFrame(wx.Frame):
             s=sys.exc_info()
             msg = (u"Login frame Error %s happened on line %d" % (s[1],s[2].tb_lineno))
             wx.MessageBox(msg)
-            return False
+            #return False
     def regHotKey(self):
         """
         This function registers the hotkey Ctrl + F12 with id
@@ -162,7 +164,7 @@ class LoginFrame(wx.Frame):
             if loginValid == "ok":
                 self.Destroy()
                 #添加启动图片
-                wx.SplashScreen(StartImg.GetBitmap(), wx.SPLASH_CENTRE_ON_SCREEN | wx.SPLASH_TIMEOUT,
+                wxSplashScreen(StartImg.GetBitmap(), wx.adv.SPLASH_CENTRE_ON_SCREEN | wx.adv.SPLASH_TIMEOUT,
                                 1000, None, -1)
                 wx.Yield()
                 #创建框架

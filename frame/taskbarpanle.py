@@ -25,9 +25,11 @@
 # <http://www.gnu.org/licenses/>.
 
 import wx
+import wx.adv
+from wx.adv import TaskBarIcon as wxTaskBarIcon
 from model.images import AppIcon
 
-class TaskBarIcon(wx.TaskBarIcon):
+class TaskBarIcon(wxTaskBarIcon):
     ID_Minshow=wx.NewId()
     ID_Maxshow=wx.NewId()
     ID_Closeshow=wx.NewId()

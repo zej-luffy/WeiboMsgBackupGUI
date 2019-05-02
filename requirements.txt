@@ -1,0 +1,15 @@
+backports.functools-lru-cache==1.5
+beautifulsoup4==4.7.1
+certifi==2019.3.9
+lxml==4.3.2
+pip==19.0.3
+pyasn1==0.4.5
+pywin32==223
+rsa==4.0
+setuptools==41.0.0
+simplejson==3.16.0
+six==1.12.0
+soupsieve==1.8
+wheel==0.33.1
+wincertstore==0.2
+wxPython==4.0.4

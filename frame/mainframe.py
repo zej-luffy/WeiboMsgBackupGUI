@@ -71,13 +71,14 @@ class MainFrame(wx.Frame):
             self.resultPath = ""
             self.keepRunning = True
             self.crawlerCount = 1
-            self.taskBarIcon = TaskBarIcon(self)
+            #self.taskBarIcon = TaskBarIcon(self)
             self.processRangeVal = 0
             
             self.Bind(wx.EVT_ICONIZE, self.OnIconfiy)
             
         except Exception:
             #self.ShowMessage(u"Exception:%s" % str(e), wx.ICON_INFORMATION)
+            #import traceback;print traceback.format_exc()
             s=sys.exc_info()
             msg = (u"Main Error '%s' happened on line %d" % (s[1],s[2].tb_lineno))
             wx.MessageBox(msg)
@@ -149,6 +150,7 @@ class MainFrame(wx.Frame):
             helpBtn.Bind(wx.EVT_BUTTON, self.ShowHelpInfo, helpBtn)
             self.crawlerBtn = crawlerBtn
         except Exception:
+            #import traceback;print traceback.format_exc()
             s=sys.exc_info()
             msg = (u"Main Error '%s' happened on line %d" % (s[1],s[2].tb_lineno))
             wx.MessageBox(msg)
@@ -158,7 +160,7 @@ class MainFrame(wx.Frame):
     def createSavePathPanel(self, panel):
         saveBtn = wx.Button(panel, label=u"选择结果路径",size=(100, 35))
         saveBtn.SetToolTipString(u"程序默认运行目录<file>为结果保存路径...")
-        savePathText = wx.TextCtrl(panel, -1, self.userConfig.GetUserConfig("save", "un"), size=(300, -1))
+        savePathText = wx.TextCtrl(parent=panel, id=-1, value="", size=(300, -1))
         savePathText.SetEditable(False)
         savePathSizer = wx.BoxSizer(wx.HORIZONTAL)
         savePathSizer.Add(saveBtn, 0)
@@ -178,7 +180,7 @@ class MainFrame(wx.Frame):
                                size=(250, -1),
                                style=wx.SL_HORIZONTAL | wx.SL_AUTOTICKS | wx.SL_LABELS )
             slider.SetLineSize(10)
-            slider.SetTickFreq(5, 1)
+            slider.SetTickFreq(5)
             st = wx.StaticText(panel, -1, u"开启线程数(推荐5):", (45, 15))
             
             webPanel = wx.Panel(panel)
@@ -215,7 +217,7 @@ class MainFrame(wx.Frame):
             webPanel.SetSizer(webInputSizer)
             webPanel.Show(True)
             
-            uidsText = wx.TextCtrl(muPanel, -1, "" , size=(300, 70),
+            uidsText = wx.TextCtrl(parent=muPanel,id= -1, value="" , size=(300, 70),
                              style = wx.TE_MULTILINE
                              #| wx.TE_RICH
                              | wx.TE_RICH2
@@ -290,7 +292,7 @@ class MainFrame(wx.Frame):
 
     def createSouthPanel(self, panel):
         st = platebtn.PlateButton(panel, -1, u"清空日志", None)
-        logText = wx.TextCtrl(panel, -1, "" , size=(600, 300),
+        logText = wx.TextCtrl(parent=panel, id=-1, value="" , size=(600, 300),
                          style = wx.TE_MULTILINE
                          #| wx.TE_RICH
                          | wx.TE_RICH2
@@ -312,7 +314,7 @@ class MainFrame(wx.Frame):
         
     def OnCloseWindow(self, event):
         if self.ConfirmDialog(u'Are you sure to Exit?!') == wx.ID_YES:
-            self.taskBarIcon.Destroy()
+            #self.taskBarIcon.Destroy()
             self.Destroy()
     
     def OnIconfiy(self, event):
